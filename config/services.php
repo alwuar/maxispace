@@ -22,6 +22,11 @@ return [
         'key' => env('RESEND_API_KEY'),
     ],
 
+    // Número de WhatsApp de Maxispace que recibe los prospectos del formulario
+    'whatsapp' => [
+        'numero' => env('WHATSAPP_NUMERO', '529993515866'),
+    ],
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),

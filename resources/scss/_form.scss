@@ -79,3 +79,12 @@
         gap: 10px;
     }
 }
+
+// Campo trampa contra bots: fuera de la vista pero no display:none
+.form-trampa {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}

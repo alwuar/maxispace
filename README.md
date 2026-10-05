@@ -1,3 +1,41 @@
+# Maxispace — landing + panel de prospectos
+
+## Qué incluye
+
+- **Formulario de la landing** (`/#contacto`): guarda al prospecto y lo manda a WhatsApp con un mensaje preformateado (folio, nombre, teléfono, tamaño, qué quiere guardar). Los botones "Consulta disponibilidad" preseleccionan el tamaño.
+- **Panel administrativo** (`/admin`): acceso solo para administradores.
+  - Lista de prospectos con filtros por **hoy, semana, mes, año** o **fechas personalizadas**, por estado y búsqueda.
+  - **Exportar a Excel** (CSV) con el filtro seleccionado.
+  - Detalle de cada prospecto: cambiar estado (**Recibido, Contactado, Perdido, Ganado**), asunto, medio (**WhatsApp / llamada / correo**) y nota.
+  - **Historial de contacto** dentro de cada prospecto.
+  - Todo responsivo: en celular la tabla se convierte en tarjetas.
+
+## Puesta en marcha
+
+```bash
+composer install
+cp .env.example .env      # ajusta DB_*, APP_URL y WHATSAPP_NUMERO
+php artisan key:generate
+php artisan migrate
+npm install && npm run build
+
+# Crear tu usuario administrador (te pide la contraseña)
+php artisan admin:crear tu-correo@maxispace.com.mx --nombre="Tu nombre"
+```
+
+Luego entra a `https://tu-dominio/admin`.
+
+Variables nuevas en `.env`:
+
+| Variable | Para qué |
+|---|---|
+| `WHATSAPP_NUMERO` | Número que recibe los prospectos (lada + número, sin + ni espacios). Ej. `529993515866` |
+| `APP_TIMEZONE` | Zona horaria para los filtros de fecha. Por defecto `America/Merida` |
+
+Pruebas: `php artisan test` (ver `tests/Feature/LeadsTest.php`).
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

@@ -12,7 +12,7 @@
                 <h5 class="titulo__producto pt-3">Bodega 1.5m x 3m</h5>
                 <small class="descripcion__producto">Ideal para guardar cajas, herramientas, artículos personales y objetos que ocupan espacio en casa.</small>
                 <div class="boton__producto">
-                    <a href="" class="btn btn-maxiorange btn-block d-grid ">Consulta disponibilidad</a>
+                    <a href="#contacto" data-tamano="1.5x3" class="btn btn-maxiorange btn-block d-grid ">Consulta disponibilidad</a>
                 </div>
             </div>
             <div class="producto">
@@ -22,7 +22,7 @@
                 <h5 class="titulo__producto pt-3">Bodega 3m x 3m</h5>
                 <small class="descripcion__producto">Ideal para guardar cajas, herramientas, artículos personales y objetos que ocupan espacio en casa.</small>
                 <div class="boton__producto">
-                    <a href="" class="btn btn-maxiorange d-grid ">Consulta disponibilidad</a>
+                    <a href="#contacto" data-tamano="3x3" class="btn btn-maxiorange d-grid ">Consulta disponibilidad</a>
                 </div>
             </div>
             <div class="producto">
@@ -32,7 +32,7 @@
                 <h5 class="titulo__producto pt-3">Bodega 6m x 3m</h5>
                 <small class="descripcion__producto">Ideal para guardar cajas, herramientas, artículos personales y objetos que ocupan espacio en casa.</small>
                 <div class="boton__producto">
-                    <a href="" class="btn btn-maxiorange d-grid ">Consulta disponibilidad</a>
+                    <a href="#contacto" data-tamano="6x3" class="btn btn-maxiorange d-grid ">Consulta disponibilidad</a>
                 </div>
             </div>
         </div>
