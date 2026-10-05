@@ -1,0 +1,163 @@
+@use 'sass:color';
+@use 'colores';
+@use 'breakpoints' as bp;
+
+// Ajustes rápidos del cristal
+$glass-bg: linear-gradient(135deg, rgba(colores.$dark, .9), rgba(colores.$dark, .76)); // color del vidrio
+$glass-border: rgba(255, 255, 255, .14);   // borde fino
+$glass-blur: 16px;                         // desenfoque de lo que pasa detrás
+
+.navbar-cristal {
+    position: sticky;
+    top: 1rem;
+    z-index: 1000;
+    margin: 1rem auto 0;
+
+    .navbar-cristal__barra {
+        display: grid;
+        // Celular: logo | hamburguesa
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: .75rem 1rem;
+
+        background: $glass-bg;
+        border: 1px solid $glass-border;
+        border-radius: 20px;
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, .18),
+            inset 0 1px 0 rgba(255, 255, 255, .08); // brillo sutil arriba
+        -webkit-backdrop-filter: blur($glass-blur) saturate(140%);
+        backdrop-filter: blur($glass-blur) saturate(140%);
+
+        // Navegadores sin blur: vidrio más opaco para que se lea igual
+        @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+            background: rgba(colores.$dark, .95);
+        }
+
+        @include bp.up(xl) {
+            // Escritorio: 3 columnas → logo | enlaces | botón
+            grid-template-columns: auto 1fr auto;
+            gap: 2rem;
+            padding: 1rem 1.25rem 1rem 1.5rem;
+            border-radius: 24px;
+        }
+    }
+
+    // ---- Columna 1: logo ----
+    .navbar-cristal__logo img {
+        display: block;
+        width: clamp(120px, 11vw, 150px);
+        height: auto;
+    }
+
+    // ---- Columna 2: enlaces ----
+    .navbar-cristal__menu {
+        // Celular: panel desplegable debajo de la barra
+        grid-column: 1 / -1;
+        display: none;
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: .75rem 0 .5rem;
+
+        &.is-open {
+            display: flex;
+        }
+
+        @include bp.up(xl) {
+            grid-column: auto;
+            display: contents; // en escritorio sus hijos se vuelven columnas 2 y 3
+        }
+    }
+
+    .navbar-cristal__enlaces {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+
+        @include bp.up(xl) {
+            flex-direction: row;
+            justify-content: center;
+            gap: clamp(1rem, 2.2vw, 2.5rem);
+        }
+
+        a {
+            display: block;
+            padding: .6rem .25rem;
+            color: #fff;
+            font-size: 1.05rem;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color .2s ease;
+
+            &:hover,
+            &:focus-visible,
+            &[aria-current] { // el JS marca la sección en la que vas
+                color: colores.$fullorange;
+            }
+
+            @include bp.up(xl) {
+                padding: .4rem 0;
+            }
+        }
+    }
+
+    // ---- Columna 3: botón WhatsApp ----
+    .navbar-cristal__cta {
+        display: block;
+        text-align: center;
+        padding: .85rem 1.75rem;
+        background-color: colores.$fullorange;
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
+        border-radius: 14px;
+        transition: background-color .2s ease, transform .2s ease;
+
+        &:hover,
+        &:focus-visible {
+            background-color: color.adjust(colores.$fullorange, $lightness: -8%);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+    }
+
+    // ---- Hamburguesa (solo celular/tablet) ----
+    .navbar-cristal__toggle {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 44px;
+        height: 44px;
+        padding: 0 10px;
+        background: rgba(255, 255, 255, .08);
+        border: 1px solid $glass-border;
+        border-radius: 12px;
+        cursor: pointer;
+
+        @include bp.up(xl) {
+            display: none;
+        }
+
+        span {
+            display: block;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+            transition: transform .25s ease, opacity .25s ease;
+        }
+
+        // Se vuelve una X al abrir
+        &[aria-expanded="true"] {
+            span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            span:nth-child(2) { opacity: 0; }
+            span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        }
+    }
+}

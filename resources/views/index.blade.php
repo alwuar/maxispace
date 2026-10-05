@@ -1,17 +1,17 @@
 @push('estilos')
-    @vite(['resources/scss/app.scss', 'resources/scss/welcome.scss', 'resources/js/app.js'])
+    @vite(['resources/scss/app.scss', 'resources/scss/welcome.scss', 'resources/js/app.js', 'resources/js/header-flotantes.js','resources/js/scroll-reveal.js'])
 @endpush
 
 <x-layouts.guest title="Mini bodegas en renta">
 
     <x-header />
 
-    <section class="valor-agregado scroll-animate pt-5 pb-5" id="porquelegirnos">
+    <section class="valor-agregado scroll-animate pt-5 pb-5" id="tipos-de-almacenamiento">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     <x-designsystem.bread bread="¿Para quien es Maxispace?" class="bread small" />
-                    <h3 class="pt-4 pb-4">¿Un espacio para cada necesidad</h3>
+                    <h3 class="pt-4 pb-4">Un espacio para cada necesidad</h3>
                     <ul class="p-0 valor__lista_point">
                         <li>
                             <span>
@@ -47,6 +47,6 @@
     <x-designsystem.cta />
     <x-designsystem.mapa />
 
-    <x-form />
+    <x-designsystem.form />
 
 </x-layouts.guest>

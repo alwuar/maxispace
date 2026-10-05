@@ -1,55 +1,64 @@
+@use 'sass:map';
+
+// font-display va DENTRO de @font-face; en selectores normales no hace nada
 @font-face {
     font-family: 'Geist-light';
-    src: url('/public/font/Geist-Light.otf');
+    src: url('/public/font/Geist-Light.otf') format('opentype');
+    font-display: swap;
 }
 @font-face {
     font-family: 'Geist-regular';
-    src: url('/public/font/Geist-Regular.otf');
+    src: url('/public/font/Geist-Regular.otf') format('opentype');
+    font-display: swap;
 }
 @font-face {
     font-family: 'Geist-medium';
-    src: url('/public/font/Geist-Medium.otf');
+    src: url('/public/font/Geist-Medium.otf') format('opentype');
+    font-display: swap;
 }
 @font-face {
-    font-family: 'Geist-medium';
-    src: url('/public/font/Geist-SemiBold.otf');
+    font-family: 'Geist-semibold'; // antes decía Geist-medium y pisaba a la Medium
+    src: url('/public/font/Geist-SemiBold.otf') format('opentype');
+    font-display: swap;
 }
 @font-face {
     font-family: 'Geist-bold';
-    src: url('/public/font/Geist-Bold.otf');
+    src: url('/public/font/Geist-Bold.otf') format('opentype');
+    font-display: swap;
 }
 @font-face {
     font-family: 'Geist-black';
-    src: url('/public/font/Geist-UltraBlack.otf');
+    src: url('/public/font/Geist-UltraBlack.otf') format('opentype');
+    font-display: swap;
 }
 
-$fuentes : (
-    "light" : 'Geist-light',
-    "regular" : 'Geist-regular',
-    "medium" : 'Geist-medium',
-    "semibold" :  'Geist-semibold',
-    "bold" :  'Geist-bold',
-    "black" :  'Geist-black'
-
+$fuentes: (
+    "light": 'Geist-light',
+    "regular": 'Geist-regular',
+    "medium": 'Geist-medium',
+    "semibold": 'Geist-semibold',
+    "bold": 'Geist-bold',
+    "black": 'Geist-black'
 );
 
-
+// En body en lugar de *, para que los hijos hereden
+// (con * un <span> dentro de un h1 se volvía regular)
+body {
+    font-family: map.get($fuentes, "regular"), system-ui, sans-serif;
+}
 
 h1, h2, h3, h4, h5, h6, .extra {
-    font-family: map-get($fuentes , "bold" );
-    font-display: swap;
+    font-family: map.get($fuentes, "bold"), system-ui, sans-serif;
+}
 
-}
 .descripcion {
-    font-family: map-get($fuentes , "light" );
+    font-family: map.get($fuentes, "light"), system-ui, sans-serif;
 }
+
 .btn-maxidark {
-    font-family: map-get($fuentes , "medium" );
+    font-family: map.get($fuentes, "medium"), system-ui, sans-serif;
 }
-* {
-    font-family: map-get($fuentes , "regular" );
-    font-display: swap;
-}
-strong { 
-    font-family: map-get($fuentes , "bold" );
+
+strong, b {
+    font-family: map.get($fuentes, "bold"), system-ui, sans-serif;
 }

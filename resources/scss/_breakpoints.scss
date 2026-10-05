@@ -1,0 +1,26 @@
+@use 'sass:map';
+
+// Mismos breakpoints que Bootstrap 5
+$breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
+);
+
+// Mobile-first: aplica de ese tamaño hacia arriba
+// Uso: @include bp.up(lg) { ... }
+@mixin up($bp) {
+    @media (min-width: map.get($breakpoints, $bp)) {
+        @content;
+    }
+}
+
+// Por si alguna vez necesitas lo contrario: de ese tamaño hacia abajo
+// Uso: @include bp.down(lg) { ... }
+@mixin down($bp) {
+    @media (max-width: map.get($breakpoints, $bp) - 0.02px) {
+        @content;
+    }
+}

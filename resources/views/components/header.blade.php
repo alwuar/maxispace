@@ -1,4 +1,19 @@
 <header class="header">
+    {{-- Objetos flotantes (decorativos) --}}
+    <div class="flotantes" aria-hidden="true">
+        <div class="flotante flotante--caja">
+            <div class="flotante__inner"><img src="{{ asset('img/caja.png') }}" alt=""></div>
+        </div>
+        <div class="flotante flotante--contenedor">
+            <div class="flotante__inner"><img src="{{ asset('img/box-plastico.png') }}" alt=""></div>
+        </div>
+        <div class="flotante flotante--dron">
+            <div class="flotante__inner"><img src="{{ asset('img/drone.png') }}" alt=""></div>
+        </div>
+        <div class="flotante flotante--silla">
+            <div class="flotante__inner"><img src="{{ asset('img/silla.png') }}" alt=""></div>
+        </div>
+    </div>
     <div class="container">
         <div class="titular">
             <x-designsystem.bread bread="Renta de mini bodegas" class="bread small" />
@@ -9,3 +24,4 @@
         </div>
     </div>
 </header>
+

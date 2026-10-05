@@ -6,29 +6,49 @@
 @use 'mapa';
 @use 'products';
 @use 'cta';
+@use 'form';
+@use 'footer';
+@use 'nav';
+@use 'flotante';
+@use 'reveal';
+@use 'breakpoints' as bp;
+
+// Base global: ninguna imagen o video se sale de su contenedor
+img, video, iframe {
+    max-width: 100%;
+}
+img {
+    height: auto;
+}
 
 .valor-agregado {
-    min-height: 400px;
+    min-height: 450px;
+    margin-top: 2em;
     display: flex;
     flex-direction: row;
-
     align-items: center;
     justify-content: center;
 
+    @include bp.up(lg) {
+        min-height: 400px;
+        margin-top: 0;
+    }
+
     ul {
         list-style-type: none;
+
         li {
             padding-bottom: 20px;
         }
     }
-} @media (max-width:991px) {
-    .valor-agregado {
-        min-height: 450px;
-        margin-top: 2em;
-        .valor__lista {
+
+    .valor__lista {
         padding-top: 1.5em;
         margin-bottom: 2em;
+
+        @include bp.up(lg) {
+            padding-top: 0;
+            margin-bottom: 0;
         }
     }
-    
 }

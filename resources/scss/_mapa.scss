@@ -1,8 +1,19 @@
+@use 'breakpoints' as bp;
+
 .mapa {
-    min-height: 600px;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
-
     justify-content: center;
     align-items: center;
+
+    @include bp.up(lg) {
+        min-height: 600px;
+    }
+
+    // Si el mapa es un iframe de Google Maps, que nunca se salga de la pantalla
+    iframe {
+        width: 100%;
+        max-width: 100%;
+    }
 }

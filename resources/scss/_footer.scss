@@ -1,0 +1,113 @@
+@use 'colores';
+@use 'breakpoints' as bp;
+
+.footer {
+    background-color: colores.$dark;
+    color: #fff;
+    padding: 3.5rem 0 3rem;
+
+    @include bp.up(lg) {
+        padding: 5rem 0 4.5rem;
+    }
+
+    // ---- Grid de 3 columnas: 1 en celular → 2 en tablet → 3 en escritorio ----
+    .footer__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+
+        @include bp.up(md) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @include bp.up(lg) {
+            grid-template-columns: 1.2fr 1fr 1.4fr;
+            gap: 3rem;
+        }
+    }
+
+    // ---- Columna 1: logo + frase ----
+    .footer__marca {
+        @include bp.up(md) {
+            grid-column: 1 / -1; // en tablet ocupa todo el ancho arriba
+        }
+
+        @include bp.up(lg) {
+            grid-column: auto;
+        }
+    }
+
+    .footer__logo {
+        display: inline-block;
+
+        img {
+            display: block;
+            width: clamp(140px, 14vw, 180px);
+            height: auto;
+        }
+    }
+
+    .footer__frase {
+        margin: 1rem 0 0;
+        font-size: 1rem;
+        opacity: .85;
+    }
+
+    // ---- Títulos de columna ----
+    .footer__titulo {
+        margin: 0 0 1rem;
+        font-size: .8rem;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        // Blanco: el naranja sobre azul no se lee bien en texto tan chico
+        color: #fff;
+    }
+
+    // ---- Columna 2: navegación ----
+    .footer__nav {
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: .6rem;
+        }
+    }
+
+    // ---- Columna 3: dirección y contacto ----
+    .footer__contacto {
+        address {
+            font-style: normal;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .footer__sucursal {
+            display: block;
+            margin-bottom: .35rem;
+        }
+
+        .footer__datos {
+            list-style: none;
+            margin: 1rem 0 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+        }
+    }
+
+    // ---- Enlaces ----
+    a {
+        color: #fff;
+        text-decoration: none;
+        transition: color .2s ease;
+        word-break: break-word; // el correo nunca se sale en celular
+
+        &:hover,
+        &:focus-visible {
+            color: colores.$fullorange;
+        }
+    }
+}

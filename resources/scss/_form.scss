@@ -1,0 +1,81 @@
+@use 'colores';
+@use 'breakpoints' as bp;
+
+.form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 3rem 0;
+    text-align: center;
+    overflow: hidden !important;
+
+    @include bp.up(lg) {
+        min-height: 850px;
+        padding: 0;
+    }
+
+    .titular {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        @include bp.up(lg) {
+            min-height: 200px;
+        }
+
+        h4, p {
+            width: 100%;
+
+            @include bp.up(lg) {
+                width: 50%;
+            }
+        }
+
+        h4 {
+            // ~28px en celular → 2.8em en escritorio
+            font-size: clamp(1.75rem, 1.2rem + 2vw, 2.8rem);
+            color: colores.$fullorange;
+        }
+    }
+
+    .formulario {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+
+        @include bp.up(lg) {
+            min-height: 300px;
+        }
+
+        .form_contenido {
+            color: gray;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 1;
+            text-align: left;
+
+            @include bp.up(lg) {
+                width: 50%;
+            }
+        }
+    }
+
+    .arrow {
+        height: 45px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+}

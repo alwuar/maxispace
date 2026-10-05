@@ -1,33 +1,175 @@
 @use 'colores';
+@use 'breakpoints' as bp;
+
 .header {
-    min-height: 700px;
+    position: relative;
+    overflow: hidden; // que los objetos nunca generen scroll horizontal
     width: 100%;
+    // En celular dejamos aire arriba y abajo para los objetos de las esquinas
+    padding: 7rem 0;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    
-   .titular {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+
+    @include bp.up(lg) {
+        min-height: 700px;
+        padding: 0;
+    }
+
+    .titular {
+        position: relative;
+        z-index: 2; // el texto siempre por encima de los objetos
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
         h1 {
-        margin-top: .2em;
-        font-size: 5.5em;
-        font-weight: 700;
-        width: 60%;
-        span {
-            color: colores.$fullorange;
+            margin: .3em 0 .2em;
+            // ~36px en celular → 88px (5.5em) en escritorio
+            font-size: clamp(2.25rem, 1.2rem + 5vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.05;
+            width: 100%;
+
+            // En escritorio corta en "Tu espacio extra / en Mérida"
+            @include bp.up(lg) {
+                max-width: 8.8em;
+            }
+
+            span {
+                color: colores.$fullorange;
+            }
+        }
+
+        p {
+            // ~18px en celular → ~26px en escritorio
+            font-size: clamp(1.125rem, 0.9rem + 0.8vw, 1.625rem);
+            font-weight: 300;
+            line-height: 1.35;
+            margin: 0 0 1.5rem;
+            width: 100%;
+            max-width: 26em; // 2 líneas en escritorio, como el diseño
         }
     }
-    p {
-        font-size: 29.33px;
-        font-weight: 300;
-        width: 50%;
+}
+
+// ------------------------------------------------------------
+// Objetos flotantes (caja, contenedor, dron, silla)
+// Estructura: .flotante (posición) > .flotante__inner (aparecer) > img (flotar)
+// ------------------------------------------------------------
+
+.flotantes {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none; // no bloquean clics al botón ni al texto
+}
+
+.flotante {
+    position: absolute;
+
+    &__inner {
+        opacity: 0;
+        transform: translateY(40px) scale(.85) rotate(var(--rot, 0deg));
+        transition:
+            opacity .6s ease,
+            transform .9s cubic-bezier(.2, .8, .2, 1);
+        transition-delay: var(--delay, 0s);
     }
+
+    // La clase la pone/quita el JS al entrar/salir de pantalla
+    &.is-visible &__inner {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(var(--rot, 0deg));
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+        animation: flotar var(--float-dur, 6s) ease-in-out infinite;
+        animation-delay: var(--float-delay, 0s);
+    }
+
+    // ---- Posiciones: celular (esquinas) → escritorio (como el diseño) ----
+
+    &--caja {
+        width: clamp(70px, 8vw, 132px); // tamaño real: 132px
+        left: 4%;
+        top: 2%;
+        --delay: 0s;
+        --float-delay: 0s;
+
+        @include bp.up(lg) {
+            left: 12.5%;
+            top: 21%;
+        }
+    }
+
+    &--contenedor {
+        width: clamp(80px, 11vw, 185px); // tamaño real: 185px
+        right: 4%;
+        top: 3%;
+        --delay: .15s;
+        --float-delay: -1.5s;
+        --float-dur: 7s;
+
+        @include bp.up(lg) {
+            right: auto;
+            left: 76.5%;
+            top: 11%;
+        }
+    }
+
+    &--dron {
+        width: clamp(60px, 7vw, 119px); // tamaño real: 119px
+        left: 6%;
+        bottom: 3%;
+        --delay: .3s;
+        --float-delay: -3s;
+
+        @include bp.up(lg) {
+            bottom: auto;
+            left: 18%;
+            top: 63%;
+        }
+    }
+
+    &--silla {
+        width: clamp(55px, 7vw, 118px); // tamaño real: 118px
+        right: 6%;
+        bottom: 2%;
+        --delay: .45s;
+        --float-delay: -4.5s;
+        --float-dur: 6.5s;
+
+        @include bp.up(lg) {
+            right: auto;
+            bottom: auto;
+            left: 75.5%;
+            top: 54%;
+        }
+    }
+}
+
+@keyframes flotar {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-14px) rotate(2deg); }
+}
+
+// Quien tenga "reducir movimiento" activado ve los objetos quietos
+@media (prefers-reduced-motion: reduce) {
+    .flotante__inner {
+        opacity: 1;
+        transform: rotate(var(--rot, 0deg));
+        transition: none;
+    }
+    .flotante img {
+        animation: none;
     }
 }

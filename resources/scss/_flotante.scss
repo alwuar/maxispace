@@ -1,0 +1,72 @@
+@use 'sass:color';
+@use 'colores';
+@use 'breakpoints' as bp;
+
+// Botón flotante de WhatsApp
+// Se llama .wa-flotante para no chocar con .flotante (los objetos del header)
+
+.wa-flotante {
+    position: fixed;
+    z-index: 1100; // por encima del navbar
+    right: calc(1.25rem + env(safe-area-inset-right));
+    bottom: calc(1.25rem + env(safe-area-inset-bottom)); // respeta la barra del iPhone
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+    background-color: colores.$fullorange;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+    text-decoration: none;
+    transition: transform .2s ease, background-color .2s ease;
+
+    svg {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        z-index: 1;
+    }
+
+    // Onda suave para llamar la atención
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background-color: colores.$fullorange;
+        animation: wa-pulso 2.4s ease-out infinite;
+    }
+
+    &:hover,
+    &:focus-visible {
+        color: #fff;
+        background-color: color.adjust(colores.$fullorange, $lightness: -8%);
+        transform: scale(1.06);
+    }
+
+    &:active {
+        transform: scale(.96);
+    }
+
+    // Solo celular y iPad: desde 1200px se oculta (ahí ya está el botón del navbar)
+    @include bp.up(xl) {
+        display: none;
+    }
+}
+
+@keyframes wa-pulso {
+    0%   { transform: scale(1);   opacity: .55; }
+    70%  { transform: scale(1.6); opacity: 0; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wa-flotante::before {
+        animation: none;
+        opacity: 0;
+    }
+}
