@@ -92,6 +92,51 @@ class LeadsTest extends TestCase
         $this->get('/')->assertOk()->assertSee('name="telefono"', false)->assertSee('Aún no lo sé');
     }
 
+    // ===== Ventana emergente de los botones de WhatsApp =====
+
+    public function test_botones_de_whatsapp_abren_la_ventana_con_instrucciones(): void
+    {
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('id="modal-contacto"', false)
+            ->assertSee('Llena tus datos y da clic en', false)
+            ->assertSee('data-abrir-contacto data-origen="boton-menu"', false)
+            ->assertSee('data-abrir-contacto data-origen="boton-flotante"', false)
+            ->assertSee('id="m-nombre"', false);
+    }
+
+    public function test_ventana_guarda_el_origen_del_boton(): void
+    {
+        $res = $this->post('/contacto', [
+            'nombre' => 'Pedro Ruiz', 'telefono' => '9997654321', 'consentimiento' => '1', 'origen' => 'boton-menu',
+        ]);
+
+        $this->assertStringStartsWith('https://wa.me/', $res->headers->get('Location'));
+        $this->assertSame('boton-menu', Lead::firstOrFail()->origen);
+    }
+
+    public function test_origen_desconocido_se_guarda_como_formulario(): void
+    {
+        $this->post('/contacto', [
+            'nombre' => 'Pedro Ruiz', 'telefono' => '9997654321', 'consentimiento' => '1', 'origen' => '<script>',
+        ]);
+
+        $this->assertSame('formulario-web', Lead::firstOrFail()->origen);
+    }
+
+    public function test_errores_en_la_ventana_la_vuelven_a_abrir(): void
+    {
+        // (sin assertSessionHasErrors aquí: consumiría los errores antes de la siguiente petición)
+        $this->post('/contacto', ['nombre' => 'Pe', 'origen' => 'boton-flotante'])
+            ->assertRedirect(url('/'));
+
+        $html = $this->get('/')->getContent();
+
+        $this->assertStringContainsString('data-abrir-al-cargar', $html);
+        // El aviso de errores aparece solo una vez: en la ventana, no en la sección
+        $this->assertSame(1, substr_count($html, 'Revisa los campos marcados'));
+    }
+
     // ===== Login =====
 
     public function test_invitado_es_enviado_al_login(): void

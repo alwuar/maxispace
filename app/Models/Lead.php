@@ -23,6 +23,13 @@ class Lead extends Model
         '6x3' => 'Bodega 6m x 3m',
     ];
 
+    /** De dónde llegó el prospecto */
+    public const ORIGENES = [
+        'formulario-web' => 'Formulario de contacto',
+        'boton-menu' => 'Botón "Hablar por WhatsApp"',
+        'boton-flotante' => 'Botón flotante de WhatsApp',
+    ];
+
     protected function casts(): array
     {
         return [
@@ -50,6 +57,11 @@ class Lead extends Model
     public function tamanoLabel(): ?string
     {
         return $this->tamano ? (self::TAMANOS[$this->tamano] ?? $this->tamano) : null;
+    }
+
+    public function origenLabel(): string
+    {
+        return self::ORIGENES[$this->origen] ?? $this->origen;
     }
 
     /** Teléfono solo con dígitos y lada de México para enlaces wa.me / tel: */

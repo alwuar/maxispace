@@ -25,7 +25,9 @@
             {{-- Columna 3: botón --}}
             <a class="navbar-cristal__cta"
                href="https://wa.me/529993515866?text={{ urlencode('Hola, quiero información sobre las mini bodegas') }}"
-               target="_blank" rel="noopener">
+               target="_blank" rel="noopener"
+               data-abrir-contacto data-origen="boton-menu"
+               aria-haspopup="dialog" aria-controls="modal-contacto">
                 Hablar por WhatsApp
             </a>
         </div>

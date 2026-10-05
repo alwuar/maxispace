@@ -32,6 +32,7 @@ class LeadController extends Controller
             'que_almacenar' => ['nullable', 'string', 'max:255'],
             'ciudad' => ['nullable', 'string', 'max:120'],
             'consentimiento' => ['accepted'],
+            'origen' => ['nullable', 'string'],
         ], [
             'telefono.regex' => 'Escribe un teléfono válido de 10 dígitos.',
             'consentimiento.accepted' => 'Necesitamos tu autorización para poder contactarte.',
@@ -44,15 +45,23 @@ class LeadController extends Controller
             'ciudad' => 'ciudad',
         ]);
 
+        // Si llega un origen desconocido se toma como formulario de la página
+        $origen = array_key_exists((string) $request->input('origen'), Lead::ORIGENES)
+            ? $request->input('origen')
+            : 'formulario-web';
+
         if ($validator->fails()) {
-            return redirect()->to(url('/').'#contacto')
+            // Desde la ventana emergente se regresa arriba y la ventana se vuelve a abrir
+            $destino = $origen === 'formulario-web' ? url('/').'#contacto' : url('/');
+
+            return redirect()->to($destino)
                 ->withErrors($validator, 'contacto')
                 ->withInput();
         }
 
         $datos = $validator->validated();
 
-        $lead = DB::transaction(function () use ($datos, $request) {
+        $lead = DB::transaction(function () use ($datos, $request, $origen) {
             $lead = Lead::create([
                 'nombre' => trim($datos['nombre']),
                 'telefono' => trim($datos['telefono']),
@@ -61,7 +70,7 @@ class LeadController extends Controller
                 'que_almacenar' => $datos['que_almacenar'] ?? null,
                 'ciudad' => $datos['ciudad'] ?? null,
                 'estado' => LeadStatus::Recibido,
-                'origen' => 'formulario-web',
+                'origen' => $origen,
                 'consentimiento_at' => now(),
                 'ip' => $request->ip(),
             ]);

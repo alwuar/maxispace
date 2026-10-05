@@ -64,7 +64,7 @@ class LeadController extends Controller
 
             fputcsv($out, [
                 'Folio', 'Fecha de registro', 'Nombre', 'Teléfono', 'Correo',
-                'Tamaño de interés', 'Qué quiere almacenar', 'Ciudad', 'Estado',
+                'Tamaño de interés', 'Qué quiere almacenar', 'Ciudad', 'Origen', 'Estado',
                 'Último contacto', 'Último asunto', 'Última nota',
             ]);
 
@@ -81,6 +81,7 @@ class LeadController extends Controller
                         $lead->tamanoLabel(),
                         $lead->que_almacenar,
                         $lead->ciudad,
+                        $lead->origenLabel(),
                         $lead->estado->label(),
                         $lead->ultimo_contacto_at?->format('Y-m-d H:i'),
                         $ultima?->asunto,

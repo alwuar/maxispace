@@ -3,6 +3,7 @@
 ## Qué incluye
 
 - **Formulario de la landing** (`/#contacto`): guarda al prospecto y lo manda a WhatsApp con un mensaje preformateado (folio, nombre, teléfono, tamaño, qué quiere guardar). Los botones "Consulta disponibilidad" preseleccionan el tamaño.
+- **Ventana emergente**: "Hablar por WhatsApp" (menú) y el botón flotante abren el mismo formulario antes de mandar a WhatsApp, así todos los prospectos quedan registrados. El panel muestra de qué botón llegó cada uno.
 - **Panel administrativo** (`/admin`): acceso solo para administradores.
   - Lista de prospectos con filtros por **hoy, semana, mes, año** o **fechas personalizadas**, por estado y búsqueda.
   - **Exportar a Excel** (CSV) con el filtro seleccionado.
@@ -30,6 +31,7 @@ Variables nuevas en `.env`:
 | Variable | Para qué |
 |---|---|
 | `WHATSAPP_NUMERO` | Número que recibe los prospectos (lada + número, sin + ni espacios). Ej. `529993515866` |
+| `APP_LOCALE` | Ponlo en `es` para que los mensajes de error salgan en español |
 | `APP_TIMEZONE` | Zona horaria para los filtros de fecha. Por defecto `America/Merida` |
 
 Pruebas: `php artisan test` (ver `tests/Feature/LeadsTest.php`).

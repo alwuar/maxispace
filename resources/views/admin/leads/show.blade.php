@@ -47,6 +47,7 @@
                     <div><dt>Tamaño de interés</dt><dd>{{ $lead->tamanoLabel() ?? '—' }}</dd></div>
                     <div><dt>Ciudad</dt><dd>{{ $lead->ciudad ?? '—' }}</dd></div>
                     <div class="grid-full" style="grid-column: 1 / -1"><dt>Qué quiere almacenar</dt><dd>{{ $lead->que_almacenar ?? '—' }}</dd></div>
+                    <div><dt>Origen</dt><dd>{{ $lead->origenLabel() }}</dd></div>
                     <div><dt>Último contacto</dt><dd>{{ $lead->ultimo_contacto_at?->translatedFormat('j M Y, H:i') ?? 'Sin contactar' }}</dd></div>
                     <div><dt>Autorizó contacto</dt><dd>{{ $lead->consentimiento_at ? 'Sí, '.$lead->consentimiento_at->translatedFormat('j M Y') : 'No' }}</dd></div>
                 </dl>

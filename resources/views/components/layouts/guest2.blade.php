@@ -16,6 +16,9 @@
     </body>
 
     <x-footer />
+
+    {{-- Formulario emergente de los botones de WhatsApp --}}
+    <x-contacto.modal />
 </body>
 
 </html>

@@ -6,6 +6,8 @@
 <a class="wa-flotante"
    href="https://wa.me/{{ $telefono }}?text={{ urlencode($mensaje) }}"
    target="_blank" rel="noopener"
+   data-abrir-contacto data-origen="boton-flotante"
+   aria-haspopup="dialog" aria-controls="modal-contacto"
    aria-label="Contactar por WhatsApp">
     {{-- Ícono de chat (puedes cambiarlo por el ícono oficial de WhatsApp) --}}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
