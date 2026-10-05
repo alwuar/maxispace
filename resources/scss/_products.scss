@@ -1,0 +1,37 @@
+.products {
+    min-height: 850px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    .grid__products {
+        min-height: 550px;
+        display: flex;
+        flex-direction: row;
+
+        justify-content: center;
+        align-items: center;
+        gap: 150px;
+        .producto {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            width: 300px;
+            .img__producto {
+            height: 272px;
+            width: 100%;
+            }
+            .titulo__producto {
+                text-align: left;
+            }
+            .descripcion__producto {
+                text-align: left;
+            }
+            .boton__producto{
+                margin-top: 1em;
+            }
+        }
+    }
+}

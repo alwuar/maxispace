@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'Geist-light';
+    src: url('/public/font/Geist-Light.otf');
+}
+@font-face {
+    font-family: 'Geist-regular';
+    src: url('/public/font/Geist-Regular.otf');
+}
+@font-face {
+    font-family: 'Geist-medium';
+    src: url('/public/font/Geist-Medium.otf');
+}
+@font-face {
+    font-family: 'Geist-medium';
+    src: url('/public/font/Geist-SemiBold.otf');
+}
+@font-face {
+    font-family: 'Geist-bold';
+    src: url('/public/font/Geist-Bold.otf');
+}
+@font-face {
+    font-family: 'Geist-black';
+    src: url('/public/font/Geist-UltraBlack.otf');
+}
+
+$fuentes : (
+    "light" : 'Geist-light',
+    "regular" : 'Geist-regular',
+    "medium" : 'Geist-medium',
+    "semibold" :  'Geist-semibold',
+    "bold" :  'Geist-bold',
+    "black" :  'Geist-black'
+
+);
+
+
+
+h1, h2, h3, h4, h5, h6, .extra {
+    font-family: map-get($fuentes , "bold" );
+    font-display: swap;
+
+}
+.descripcion {
+    font-family: map-get($fuentes , "light" );
+}
+.btn-maxidark {
+    font-family: map-get($fuentes , "medium" );
+}
+* {
+    font-family: map-get($fuentes , "regular" );
+    font-display: swap;
+}
+strong { 
+    font-family: map-get($fuentes , "bold" );
+}

@@ -1,0 +1,9 @@
+@use 'colores';
+
+.bread {
+    
+    width: auto;
+    background-color: colores.$orange;
+    padding:  .50em 1.5em;
+    border-radius: 10px;
+}

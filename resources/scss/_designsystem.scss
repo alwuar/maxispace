@@ -1,0 +1,47 @@
+@use 'colores';
+
+
+// botones
+
+.btn-maxidark {
+    border: 1px colores.$fullorange solid ;
+    background-color: colores.$dark;
+    padding: .4em 2em;
+    border-radius: 10px;
+}
+
+.btn-maxiorange {
+    border: none;
+    background-color: colores.$fullorange ;
+    border-radius: 10px;
+    font-size: .9em;
+    color: white;
+
+    &:hover {
+    background-color: colores.$dark;
+    color: colores.$fullorange;
+    }
+}
+
+.btn-maxigreen {
+    border: 1px colores.$green solid ;
+    background-color: colores.$green;
+    padding: .4em 2em;
+    border-radius: 10px;
+    font-size: .9em;
+    color: #fff;
+    &:hover {
+    background-color: colores.$dark;
+    color: colores.$fullorange;
+    }
+}
+
+.btn-maxiblue {
+    background-color: colores.$blue;
+    padding: .3em 2em;
+    color: #fff;
+    &:hover {
+    background-color: colores.$dark;
+    color: colores.$fullorange;
+    }
+}
