@@ -28,6 +28,10 @@ body.admin {
     background: var(--mx-bg);
     color: var(--mx-dark);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .admin-main { flex: 1 0 auto; } // empuja el pie hasta abajo en páginas cortas
 }
 
 // ===== Barra superior =====
@@ -378,7 +382,9 @@ body.admin {
 
 // ===== Login =====
 body.admin-login {
+    position: relative;
     min-height: 100vh;
+    padding-bottom: 3.5rem !important; // espacio para el crédito de abajo
     display: flex;
     align-items: center;
     justify-content: center;
@@ -423,3 +429,69 @@ body.admin-login {
 .pagination { flex-wrap: wrap; gap: .25rem; }
 .page-link { border-radius: 8px !important; }
 .min-w-0 { min-width: 0; }
+
+// ===== Pie del panel =====
+.admin-footer {
+    border-top: 1px solid var(--mx-line);
+    background: #fff;
+    padding: 1rem 0 calc(1rem + env(safe-area-inset-bottom));
+    font-size: .85rem;
+    color: var(--mx-muted);
+}
+
+.admin-footer__fila {
+    display: flex;
+    flex-direction: column-reverse; // en celular el botón va arriba, más fácil de tocar
+    align-items: center;
+    gap: .75rem;
+    text-align: center;
+
+    @include bp.up(md) {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+    }
+}
+
+.admin-footer__credito {
+    margin: 0;
+
+    a {
+        color: var(--mx-dark);
+        font-family: 'Geist-semibold', system-ui, sans-serif;
+        text-decoration: none;
+        &:hover { color: var(--mx-blue); text-decoration: underline; }
+    }
+}
+
+.admin-footer__wa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: .55rem 1rem;
+    border-radius: 10px;
+    background: #25d366;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Geist-medium', system-ui, sans-serif;
+    line-height: 1.25;
+    transition: background-color .15s ease;
+
+    svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    &:hover, &:focus-visible { background: #1da851; color: #fff; }
+}
+
+.login-credito {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+    margin: 0;
+    text-align: center;
+    font-size: .8rem;
+    color: rgba(255, 255, 255, .55);
+
+    a { color: rgba(255, 255, 255, .85); text-decoration: none; &:hover { color: #fff; text-decoration: underline; } }
+}

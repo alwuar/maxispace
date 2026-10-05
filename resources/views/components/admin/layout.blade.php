@@ -54,5 +54,7 @@
             {{ $slot }}
         </div>
     </main>
+
+    <x-admin.footer />
 </body>
 </html>

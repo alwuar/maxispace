@@ -40,5 +40,9 @@
             <button type="submit" class="btn btn-mx w-100 py-2">Entrar</button>
         </form>
     </main>
+
+    <p class="login-credito">
+        Desarrollado por <a href="https://agenciavandu.com" target="_blank" rel="noopener">agenciavandu.com</a>
+    </p>
 </body>
 </html>

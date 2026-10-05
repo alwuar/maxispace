@@ -31,6 +31,7 @@ Variables nuevas en `.env`:
 | Variable | Para qué |
 |---|---|
 | `WHATSAPP_NUMERO` | Número que recibe los prospectos (lada + número, sin + ni espacios). Ej. `529993515866` |
+| `VANDU_WHATSAPP` | WhatsApp de Agencia Vandu para el botón "agregar más sucursales" del pie del panel. Vacío = no se muestra |
 | `APP_LOCALE` | Ponlo en `es` para que los mensajes de error salgan en español |
 | `APP_TIMEZONE` | Zona horaria para los filtros de fecha. Por defecto `America/Merida` |
 

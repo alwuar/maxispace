@@ -27,6 +27,11 @@ return [
         'numero' => env('WHATSAPP_NUMERO', '529993515866'),
     ],
 
+    // WhatsApp de Agencia Vandu para el botón del pie del panel ("agregar más sucursales")
+    'vandu' => [
+        'whatsapp' => env('VANDU_WHATSAPP'),
+    ],
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),

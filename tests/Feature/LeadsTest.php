@@ -167,6 +167,23 @@ class LeadsTest extends TestCase
         $this->assertGuest();
     }
 
+    public function test_pie_del_panel_con_credito_y_whatsapp_de_vandu(): void
+    {
+        config(['services.vandu.whatsapp' => '52 999 000 1111']);
+
+        $this->actingAs($this->admin())->get('/admin/prospectos')
+            ->assertOk()
+            ->assertSee('href="https://agenciavandu.com"', false)
+            ->assertSee('https://wa.me/529990001111?text=', false)
+            ->assertSee('Contactar por WhatsApp para agregar más sucursales');
+
+        // Sin número configurado el botón no aparece, el crédito sí
+        config(['services.vandu.whatsapp' => null]);
+        $this->actingAs($this->admin())->get('/admin/prospectos')
+            ->assertSee('agenciavandu.com')
+            ->assertDontSee('agregar más sucursales');
+    }
+
     // ===== Listado, filtros y exportación =====
 
     public function test_filtros_por_periodo_y_estado(): void
